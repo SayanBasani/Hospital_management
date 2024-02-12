@@ -91,7 +91,7 @@ def prescription_login(request):
   
     pat_id = request.POST.get("patient_id")
     data = database.collection('Prescription Database').document(pat_id).get().to_dict()
-    print(data)
+    print("hello World")
 
     if data:
         return render(request, "prescription.html", {"prescription_data": data})
@@ -100,5 +100,3 @@ def prescription_login(request):
   
   
   
-
-
