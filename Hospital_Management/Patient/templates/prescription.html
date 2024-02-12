@@ -1,0 +1,143 @@
+{% extends "nav.html" %}
+
+{% block title %}Patient Prescription{% endblock  %}
+
+{% block style %}
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+    }
+
+    h1 {
+        color: #3498db;
+        text-align: center;
+    }
+
+    h3 {
+        color: #3498db;
+    }
+
+    p {
+        margin-bottom: 10px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th,
+    td {
+        border: 1px solid #d4d2d2;
+        padding: 12px;
+        text-align: left;
+    }
+
+    td:hover {
+        background-color: #ecf0f1;
+    }
+
+    th {
+        background-color: #3498db;
+        color: white;
+    }
+
+    .info {
+        display: flex;
+        justify-content: space-between;
+        background-color: #ecf0f1;
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+
+    .pInfo,
+    .dInfo {
+        flex: 1;
+    }
+
+    .dInfo {
+        margin-left: 20px;
+    }
+
+    .tests{
+        margin-bottom: 25px;
+    }
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+<h1>Doctor's Prescription</h1>
+<div class="info">
+    <div class="pInfo">
+        <p><strong>Patient Name: </strong> {{prescription_data.patient_name}}</p>
+        <p><strong>Date: </strong> 05.02.2024</p>
+    </div>
+
+    <div class="dInfo">
+        <p><strong>Doctor's Name : </strong> {{ prescription_data.doc_name }}</p>
+        <p><strong>Id : </strong> {{ prescription_data.doc_id }} </p>
+    </div>
+</div>
+
+<br><br>
+
+<h3>Medicine to take:-</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Medication</th>
+            <th>Dosage</th>
+            <th>Morning</th>
+            <th>Afternoon</th>
+            <th>Night</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for medicine in prescription_data.medicines_prescribed %}
+        <tr>
+            <td>{{ medicine.med_name }}</td>
+            <td>{{ medicine.quantity }}</td>
+            <td>{{ medicine.morning  }}</td>
+            <td>{{ medicine.afternoon  }}</td>
+            <td>{{ medicine.night  }}</td>
+
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<br> <br>
+
+<h3>Tests to do:-</h3>
+<table class="tests">
+    <thead>
+        <tr>
+            <th>Tests</th>
+            <th>Tests Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Instructions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for test in prescription_data.test_advices %}
+        <tr>
+            <td>{{ test.test_id }}</td>
+            <td>{{ test.test_name }}</td>
+            <td>12.02.2024</td>
+            <td>11:00 AM</td>
+            <td>Empty Stomach</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    
+</table>
+
+</div>
+
+{% endblock  %}
